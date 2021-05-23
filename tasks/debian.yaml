@@ -1,0 +1,20 @@
+---
+- name: Installing vsftpd
+  apt:
+    update_cache: true
+    cache_valid_time: "3600"
+    state: present
+    name: vsftpd
+
+- name: Templating out vsftpd config file
+  template:
+    src: templates/vsftpd.conf.j2
+    dest: /etc/vsftpd.conf
+  notify:
+    - restart vsftpd
+    
+- name: Making sure vsftpd service is enabled and started
+  service:
+    name: vsftpd
+    enabled: yes
+    state: started

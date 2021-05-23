@@ -1,0 +1,4 @@
+---
+- name: Installing chrony for Debian type OS family (using apt)
+  include_tasks: debian.yaml
+  when: ansible_facts['os_family'] == "Debian"
